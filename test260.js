@@ -16,9 +16,9 @@
 
   var inner = fn(100)
 
-  console.log(inner(200))
-  console.log(inner(200))
-  console.log(fn(100)(200))
-  console.log(getInfo('curry')(100)(200))
+  console.log(inner(200)) // 300
+  console.log(inner(200)) // 301
+  console.log(fn(100)(200)) // 300
+  console.log(getInfo('curry')(100)(200)) // 300
 
 })();
