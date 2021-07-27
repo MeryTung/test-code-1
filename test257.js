@@ -19,10 +19,10 @@
       left = i + 1
       right = arr.length - 1
       while (left < right) {
-        const val = arr[left] + arr[right] + fixedVal
-        if (val > target) {
+        const sum = arr[left] + arr[right] + fixedVal
+        if (sum > target) {
           right -= 1
-        } else if (val < target) {
+        } else if (sum < target) {
           left += 1
         } else {
           res.push([fixedVal, arr[left++], arr[right--]])
