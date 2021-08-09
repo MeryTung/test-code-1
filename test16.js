@@ -9,8 +9,7 @@
       {id: 6, pid: 5, name: '杏花岭区'}
     ];
   
-    function formatArrayChildren (arr, pid) {
-      var pid = pid !== undefined ? pid : 0;
+    function formatArrayChildren (arr, pid = 0) {
       var res = [];
       
       for (var i = 0; i < arr.length; i += 1) {
@@ -29,8 +28,7 @@
     console.log(formatedCityList);
     console.log('-----------------');
   
-    function normalizeArrayChildren (arr, pid) {
-      var pid = pid !== undefined ? pid : 0;
+    function normalizeArrayChildren (arr, pid = 0) {
       var res = [];
   
       for (var i = 0; i < arr.length; i += 1) {
