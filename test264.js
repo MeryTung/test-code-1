@@ -22,7 +22,7 @@
       const _keys = key.split('.')
       const arr = _keys.reduce((cur, pre) => {
         _obj = cur
-        const reg = /([a-z]+)?(\[(\d+)\])/g
+        const reg = /(\w+)?(\[(\d+)\])/g
         let matched
         let mark = false
         while (matched = reg.exec(pre)) {
