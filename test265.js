@@ -45,7 +45,8 @@
         b: {
           c: [1, {d: 'ddd'}]
         }
-      }
+      },
+      b: {}
     },
     setData
   }
@@ -53,10 +54,12 @@
   obj.setData({
     'e.f.g[2].h': 123,
     'a.b.c[0]': 1000,
-    'i[0][0][1]': -1
+    'i[0][0][1]': -1,
+    'b[100]': [0, 1, 2, 3]
   })
   console.log(obj.data.e.f.g[2])
   console.log(obj.data.a.b.c)
   console.log(obj.data.i)
+  console.log(obj.data.b)
 
 })();
