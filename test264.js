@@ -23,12 +23,12 @@
     keys.forEach(key => {
       let _obj
       const _keys = key.split('.')
-      const arr = _keys.reduce((cur, pre) => {
-        _obj = cur
+      const arr = _keys.reduce((data, prop) => {
+        _obj = data
         const reg = /(\w+)?(\[(\d+)\])/g
         let matched
         let mark = false
-        while (matched = reg.exec(pre)) {
+        while (matched = reg.exec(prop)) {
           mark = true
           if (matched[1]) {
             _obj = _obj[matched[1]]
@@ -38,7 +38,7 @@
           }
         }
         if (mark) return _obj
-        return _obj[pre]
+        return _obj[prop]
       }, obj)
       arr.splice(data[key][0], data[key][1], ...data[key].slice(2))
     })
@@ -63,8 +63,8 @@
  
   const arr = str.split('.')
 
-  const res = arr.reduce((cur, pre) => {
-    return cur[pre]
+  const res = arr.reduce((data, prop) => {
+    return data[prop]
   }, obj)
 
   console.log(res)
