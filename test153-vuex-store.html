@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>test vuex store</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/vuex/3.5.1/vuex.js"></script>
+
+  <script>
+    ;(function (window, Vue, Vuex) {
+      debugger
+      Vue.use(Vuex)
+
+      const vInstance = new Vue({
+        el: '#app',
+        render: function (h) {
+          return h('div', 'hello world')
+        },
+        store: new Vuex.Store({
+          state: {
+            a: 1,
+            b: 2
+          },
+          mutations: {
+            CHANGE_A () {}
+          },
+          actions: {
+            changeA () {}
+          },
+          modules: {
+            hello: {
+              namespaced: true,
+              state: {
+                a: 'hello-a',
+                b: 'hello-b'
+              },
+              mutations: {
+                CHANGE_A () {},
+                CHANGE_B() {}
+              },
+              actions: {
+                changeA () {},
+                changeB () {}
+              }
+            }
+          }
+        })
+      })
+      console.log('vInstance: ', vInstance)
+    })(window, Vue, Vuex);
+  </script>
+</body>
+</html>

@@ -7,23 +7,24 @@
       b: 2,
     },
     mutations: {
-      CHANGE_A() {},
+      CHANGE_A() { },
     },
     actions: {
-      changeA() {},
+      changeA() { },
     },
     modules: {
       hello: {
-        namespaced: "hello",
+        namespaced: true,
         state: {
           a: 1,
           b: 2,
         },
         mutations: {
-          CHANGE_A() {},
+          CHANGE_A() { },
+          CHANGE_B() { }
         },
         actions: {
-          changeA() {},
+          changeA() { },
         },
         modules: {
           hi: {
@@ -32,112 +33,120 @@
               b: 2,
             },
             mutations: {
-              CHANGE__A() {},
+              CHANGE_A() { },
             },
             actions: {
-              changeA() {},
+              changeA() { },
             },
           },
         },
       },
       world: {
-        namespaced: "world",
+        namespaced: true,
         state: {
           a: 1,
           b: 2,
         },
         mutations: {
-          CHANGE_A() {},
+          CHANGE_A() { },
         },
         actions: {
-          changeA() {},
+          changeA() { },
         },
       },
     },
-  };
+  }
 
   function createStore(options) {
     const store = {
       _mutations: Object.create(null),
       _actions: Object.create(null),
-    };
-    installModule(store, options, []);
-    return store;
+    }
+    installModule(store, options, [])
+    return store
   }
 
   function installModule(store, options, path) {
-    const namespace = getNamespace(path);
-    registerStore(store, options, namespace, path);
+    const namespace = getNamespace(path)
+
+    forEachState(store, namespace, options.state)
+    forEachMutation(store, namespace, options.mutations)
+    forEachAction(store, namespace, options.actions)
+    forEachChild(store, options.modules, path)    
   }
 
   function getNamespace(path) {
     return path.length
       ? path.reduce(
-          (namespace, key) => (namespace ? namespace + "/" + key : key),
-          ""
-        )
-      : "";
-  }
-
-  function registerStore(store, options, namespace, path) {
-    forEachState(store, namespace, options.state);
-    forEachMutation(store, namespace, options.mutations);
-    forEachAction(store, namespace, options.actions);
-
-    if (options.modules) {
-      Object.keys(options.modules).forEach((key) => {
-        installModule(store, options.modules[key], path.concat(key));
-      });
-    }
+        (namespace, key) => (namespace ? namespace + '/' + key : key),
+        ''
+      )
+      : ''
   }
 
   function forEachState(store, namespace, value) {
-    if (!value) return;
+    if (!value) return
 
     const obj = !namespace
       ? store
-      : store[namespace] || (store[namespace] = {});
+      : store[namespace] || (store[namespace] = {})
 
     Object.keys(value).forEach((key) => {
-      obj[key] = value[key];
-    });
+      obj[key] = value[key]
+    })
   }
 
   function forEachMutation(store, namespace, value) {
-    if (!value) return;
+    if (!value) return
 
-    if (namespace) {
-      const list =
-        store._mutations[namespace] || (store._mutations[namespace] = []);
-      Object.keys(value).forEach((key) => {
-        list.push(value[key]);
-      });
-    } else {
-      const _mutations = store._mutations;
-      Object.keys(value).forEach((key) => {
-        _mutations[key] = value[key];
-      });
-    }
+    Object.keys(value).forEach((key) => {
+      const type = namespace ? `${namespace}/${key}` : key
+      const entry = store._mutations[type] || (store._mutations[type] = [])
+      entry.push(function wrappedMutationHandler (payload) {
+        value[key].call(store, {
+          commit: function () {},
+          dispatch: function () {}
+        }, payload)
+      })
+    })
   }
 
   function forEachAction(store, namespace, value) {
-    if (!value) return;
+    if (!value) return
 
-    if (namespace) {
-      const list =
-        store._actions[namespace] || (store._actions[namespace] = []);
-      Object.keys(value).forEach((key) => {
-        list.push(value[key]);
-      });
-    } else {
-      const _actions = store._actions;
-      Object.keys(value).forEach((key) => {
-        _actions[key] = value[key];
-      });
+    Object.keys(value).forEach((key) => {
+      const type = namespace ? `${namespace}/${key}` : key
+      const entry = store._actions[type] || (store._actions[type] = [])
+      entry.push(function wrappedActionHandler (payload) {
+        let res = value[key].call(store, {
+          dispatch: function () {},
+          commit: function () {},
+          getters: {},
+          state: {},
+          rootGetters: {},
+          rootState: {}
+        }, payload)
+        if (!isPromise(res)) {
+          res = Promise.resolve(res)
+        }
+        return res
+      })
+    })
+  }
+
+  function forEachChild (store, modules, path) {
+    if (modules) {
+      Object.keys(modules).forEach((key) => {
+        installModule(store, modules[key], path.concat(key))
+      })
     }
   }
 
-  const store = createStore(options);
-  console.log(store);
-  console.log(store._mutations["hello/hi"]);
-})();
+  function isPromise (val) {
+    return val && typeof val.then === 'function'
+  }
+
+  const store = createStore(options)
+  console.log(store)
+  console.log(store._mutations['hello/hi/CHANGE_A'])
+})()
