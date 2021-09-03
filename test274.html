@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>防抖和截流</title>
+  <style>
+    html,
+    body {
+      height: 4000px;
+    }
+  </style>
+</head>
+
+<body>
+  <script>
+    ; (function (window, document) {
+      return
+      // 不做任何处理
+      function showTop() {
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log('滚动条位置：' + scrollTop);
+      }
+      window.onscroll = showTop
+    })(window, document);
+
+    ; (function (window, document) {
+      return
+      // 防抖：对于短时间内连续触发的事件，防抖的含义就是让某个时间期限内，事件处理函数只执行一次。
+      function debounce(fn, delay) {
+        let timer = null
+        return function () {
+          if (timer) {
+            clearTimeout(timer)
+          }
+          timer = setTimeout(fn, delay)
+        }
+      }
+
+      function showTop() {
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log('滚动条位置：' + scrollTop);
+      }
+
+      window.onscroll = debounce(showTop, 1000)
+    })(window, document);
+
+    ; (function (window, document) {
+      // 节流：让函数每隔固定的一段时间执行一次
+
+      // function throttle(fn, delay) {
+      //   let valid = true
+      //   return function () {
+      //     if (!valid) {
+      //       return false
+      //     }
+      //     valid = false
+      //     setTimeout(() => {
+      //       fn()
+      //       valid = true
+      //     }, delay)
+      //   }
+      // }
+
+      function throttle (fn, delay) {
+        let now = Date.now()
+        return function () {
+          const currentTime = Date.now()
+          if (currentTime - now >= delay) {
+            now = currentTime
+            fn()
+          }
+        }
+      }
+
+      function showTop() {
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop
+        console.log('滚动条位置：' + scrollTop)
+      }
+      window.onscroll = throttle(showTop, 1000)
+    })(window, document);
+  </script>
+</body>
+
+</html>
