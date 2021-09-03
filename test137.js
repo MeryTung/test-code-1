@@ -64,6 +64,8 @@
 (function () {
   // 异常传值的情况
 
+  return
+
   function* run() {
     var x = yield "starting";
     var y = yield x * 2;
@@ -76,7 +78,7 @@
   var res = gen.next("1111"); // '1111'被丢弃
   console.log(res.value); // 输出"starting"
 
-  res = gen.next(); // 不给yield传值 x成了undefined
+  res = gen.next(); // ------- 不给yield传值 x成了undefined ---------
   console.log(res.value); // 输出NaN （undefined * 2得到了NaN传给next()运行后的对象）
 
   res = gen.next(); // 不给yield传值 y未拿到值
@@ -137,4 +139,30 @@
   }
 
   co(run);
+})();
+
+;(function () {
+
+  function* run () {
+    var a = yield 'a'
+    var b = yield 2
+    var c = yield 3 * b
+    console.log({
+      a,
+      b,
+      c
+    }) // { a: 456, b: 789, c: 1 }
+    return a + b + c
+  }
+
+  var gen = run()
+
+  // 第一个 next 用于启动 gen 函数，传入的参数会被忽略
+  // 从第二个 next 开始，先把 next 的参数作为结果赋给上一个 yield 的结果，然后再执行当前 yield 表达式
+  console.log(gen.next(123).value) // a
+  console.log(gen.next(456).value) // 2 ， a 变成了 456，执行 yield 后面的表达式输出 2
+  console.log(gen.next(789).value) // 2367 = 789 * 3 ， b 变成了 789，执行 yield 后面的表达式，输出 2367
+  console.log(gen.next(1).value) // 1246 = 456 + 789 + 1，c 变成了 1，执行 return 语句
+  console.log(gen.next().done) // true
+
 })();
