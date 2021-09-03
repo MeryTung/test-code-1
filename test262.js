@@ -1,5 +1,7 @@
 ; (function () {
 
+  return
+
   // https://www.cnblogs.com/zyl-Tara/p/10416886.html
 
   // async定义的是一个Promise函数和普通函数一样只要不调用就不会进入事件队列。
@@ -63,6 +65,7 @@
     return new Promise(() => {
       console.log('promise')
     })
+    // return Promise.resolve('promise')
   }
 
   async1()
@@ -76,5 +79,6 @@
   // 以上 await 后面是 promise 对象，await 暂停了 async 后面的代码（async1 end），先执行 async 外面的同步代码，
   // 等着 Promise 对象 fulfilled，然后把 resolve 的参数作为 await 表达式的运算结果。
   // 但是以上 promise 并没有 resolve，所以最后 async1 end 没有执行
+  // 如果将 new Promise 的代码换成 Promise.resolve 或加上 resolve 的代码，async1 end 就会被打印
 
 })();
