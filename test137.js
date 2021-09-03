@@ -159,10 +159,32 @@
 
   // 第一个 next 用于启动 gen 函数，传入的参数会被忽略
   // 从第二个 next 开始，先把 next 的参数作为结果赋给上一个 yield 的结果，然后再执行当前 yield 表达式
+  // 手动 next 太繁琐，而且容易出错，co 函数正好解决这个问题
   console.log(gen.next(123).value) // a
   console.log(gen.next(456).value) // 2 ， a 变成了 456，执行 yield 后面的表达式输出 2
   console.log(gen.next(789).value) // 2367 = 789 * 3 ， b 变成了 789，执行 yield 后面的表达式，输出 2367
   console.log(gen.next(1).value) // 1246 = 456 + 789 + 1，c 变成了 1，执行 return 语句
   console.log(gen.next().done) // true
 
+  console.log('----------------------------------')
+
+  function co (fn) {
+    var gen = fn()
+    
+    return next()
+
+    function next (value) {
+      var res = gen.next(value)
+      if (!res) {
+        return
+      }
+      if (!res.done) {
+        return next(res.value)
+      }
+      return res.value
+    }
+  }
+
+  console.log(co(run)) // a26
+  // { a: 'a', b: 2, c: 6 }
 })();
