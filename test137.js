@@ -188,3 +188,23 @@
   console.log(co(run)) // a26
   // { a: 'a', b: 2, c: 6 }
 })();
+
+;(function () {
+
+  console.log('~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~')
+
+  function* run () {
+    var a = yield 1
+    var b = yield 2
+    var c = 3
+    var d = 4
+    console.log(a, b, c, d)
+  }
+
+  var gen = run()
+  console.log(gen.next().value)
+  console.log(gen.next(100).value)
+  // 没有以下 next，run 函数第二个 yield 后面的代码都不执行
+  // console.log(gen.next(200).value)
+
+})();
