@@ -1,5 +1,4 @@
 (function () {
-  // https://github.com/zymfe/test-code/blob/master/test169.js
   var str = "1234567891.102";
 
   function formatPriceStr(str) {
