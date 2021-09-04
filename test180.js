@@ -1,5 +1,5 @@
 (function () {
-  //github.com/zymfe/test-code/blob/master/test109.js
+  //github.com/zhaoyiming0803/test-code/blob/master/test109.js
   // https://segmentfault.com/a/1190000008594792
   // 关于相等操作符，可参考《JavaScript高级程序设计》第51页
   var obj = {
