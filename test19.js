@@ -2,14 +2,13 @@
   var str = "1234567891.102";
 
   function formatPriceStr(str) {
-    var priceStr = "";
     var pointIdx = str.indexOf(".");
     var integer = "";
     var decimal = "";
 
     if (pointIdx > -1) {
       integer = str.substr(0, pointIdx);
-      decimai = str.substr(pointIdx);
+      decimal = str.substr(pointIdx);
     } else {
       integer = str;
     }
@@ -24,7 +23,7 @@
       num += 1;
     }
 
-    return arr.reverse().join("") + decimai;
+    return arr.reverse().join("") + decimal;
   }
 
   console.log(formatPriceStr(str));
