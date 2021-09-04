@@ -5,7 +5,8 @@
     context.fn = this;
 
     var args = arguments[1];
-    var res = eval('context.fn('+ args.join(',') +')');
+    // var res = eval('context.fn('+ args.join(',') +')');
+    var res = context.fn(...args)
 
     delete context.fn;
     return res;

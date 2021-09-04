@@ -11,7 +11,8 @@
 
     var args = [].slice.call(arguments, 1);
 
-    var res = eval('context.fn(' + args.join(',') + ')');
+    // var res = eval('context.fn(' + args.join(',') + ')');
+    var res = context.fn(...args)
 
     delete context.fn;
     return res;
@@ -30,5 +31,23 @@
 
   console.log(fn._call(obj, 1, 2));
   console.log(obj);
+
+})();
+
+;(function () {
+
+  var obj = {
+    a: 1,
+    b: 2
+  }
+
+  function fn () {
+    return this.a + this.b
+  }
+
+  console.log(fn()) // NaN
+
+  obj.fn = fn
+  console.log(obj.fn()) // 3
 
 })();
