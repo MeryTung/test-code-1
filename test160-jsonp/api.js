@@ -10,7 +10,7 @@ const server = http.createServer((req, res) => {
   }
 
   const query = {}
-  req.url.slice(markIndex+1).replace(/([a-z]+)=(\w+)/g, ($0, $1, $2) => {
+  req.url.slice(markIndex+1).replace(/(\w+)=(\w+)/g, ($0, $1, $2) => {
     query[$1] = $2
   })
   console.log('query: ', query)
