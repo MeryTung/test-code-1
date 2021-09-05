@@ -15,7 +15,7 @@ const server = http.createServer((req, res) => {
     req.url.replace(reg, ($0, $1) => {
       setTimeout(() => {
         res.end(file);
-      }, $1 * 1000);
+      }, 1000 * Math.random());
     });
   } else {
     res.end(file);
