@@ -9,7 +9,7 @@ const server = http.createServer((req, res) => {
     return;
   }
   const file = fs.readFileSync(publicPath + req.url, "utf-8");
-  const reg = /(\d+)\.js/;
+  const reg = /[1,2]\.js/;
   const isJs = reg.test(req.url);
   if (isJs) {
     req.url.replace(reg, ($0, $1) => {

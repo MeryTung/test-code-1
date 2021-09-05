@@ -6,13 +6,16 @@
     <title>Document</title>
   </head>
   <body>
+    <!-- 4.js 3.js inner 1.js 2.js  DOMContentLoaded-->
     <script>
       window.addEventListener("DOMContentLoaded", (e) => {
         console.log("DOMContentLoaded");
       });
     </script>
+    <script src="./4.js"></script>
     <script src="./1.js" defer></script>
     <script src="./2.js" defer></script>
+    <script src="./3.js"></script>
     <script>
       console.log("inner script");
     </script>
