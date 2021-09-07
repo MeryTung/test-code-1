@@ -30,8 +30,7 @@
           return obj[prop]
         }
         if (typeof arr[index + 1] === 'number') {
-          obj[prop] = []
-          return obj[prop]
+          return (obj[prop] = [])
         }
         return (obj[prop] = {})
       }, this.data)
