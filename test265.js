@@ -56,6 +56,7 @@
     'i[0][0][1]': -1,
     'b[100]': [0, 1, 2, 3]
   })
+  console.log(obj.data.e)
   console.log(obj.data.e.f.g[2])
   console.log(obj.data.a.b.c)
   console.log(obj.data.i)
