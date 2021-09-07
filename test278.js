@@ -1,10 +1,10 @@
 ;(function () {
 
-  function mockInstanceOf (obj, Fn) {
+  function mockInstanceof (obj, Fn) {
     if (typeof obj !== 'object') {
       return false
     }
-    if (typeof Fn !== 'function') {
+    if (Fn === null || Fn === undefined || typeof Fn !== 'function') {
       return false
     }
     var prototype = Fn.prototype
@@ -22,8 +22,8 @@
   var obj = {}
   var str = ''
 
-  console.log(mockInstanceOf(p, Person)) // true
-  console.log(mockInstanceOf(obj, Person)) // false
-  console.log(mockInstanceOf(str, Person)) // false
+  console.log(mockInstanceof(p, Person)) // true
+  console.log(mockInstanceof(obj, Person)) // false
+  console.log(mockInstanceof(str, Person)) // false
 
 })();
