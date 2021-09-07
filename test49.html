@@ -92,25 +92,25 @@
         }
 
         function createEle(ele, vnode) {
-          // vnode.ele = createElement(vnode.tag);
-          // if (Array.isArray(vnode.children) && vnode.children.length) {
-          //   createChild(vnode.ele, vnode.children);
-          // } else {
-          //   vnode.text && initContent(vnode.ele, vnode.text);
-          //   vnode.on && initEvent(vnode.ele, vnode.on);
-          // }
-          // appendChild(ele, vnode.ele);
-
-          const _ele = createElement(vnode.tag);
+          vnode.ele = createElement(vnode.tag);
           if (Array.isArray(vnode.children) && vnode.children.length) {
-            createChild(_ele, vnode.children);
+            createChild(vnode.ele, vnode.children);
           } else {
-            vnode.text && initContent(_ele, vnode.text);
-            vnode.on && initEvent(_ele, vnode.on);
+            vnode.text && initContent(vnode.ele, vnode.text);
+            vnode.on && initEvent(vnode.ele, vnode.on);
           }
-          appendChild(ele, _ele);
+          appendChild(ele, vnode.ele);
 
-          return _ele;
+          // const _ele = createElement(vnode.tag);
+          // if (Array.isArray(vnode.children) && vnode.children.length) {
+          //   createChild(_ele, vnode.children);
+          // } else {
+          //   vnode.text && initContent(_ele, vnode.text);
+          //   vnode.on && initEvent(_ele, vnode.on);
+          // }
+          // appendChild(ele, _ele);
+
+          // return _ele;
         }
 
         function createChild(ele, children) {
