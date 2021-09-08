@@ -1,6 +1,6 @@
-//github.com/zymfe/test-code/blob/master/test210.js
-// 使用Function构造器生成的函数，并不会在创建它们的上下文中创建闭包；它们一般在全局作用域中被创建。
-// 当运行这些函数的时候，它们只能访问自己的本地变量和全局变量，不能访问Function构造器被调用生成的上下文的作用域。
+//github.com/zhaoyiming0803/test-code/blob/master/test210.js
+// 使用 Function 构造器生成的函数，并不会在创建它们的上下文中创建闭包；它们一般在全局作用域中被创建。
+// 当运行这些函数的时候，它们只能访问自己的本地变量和全局变量，不能访问 Function 构造器被调用生成的上下文的作用域。
 // 这和使用带有函数表达式代码的 eval 不同
 
 (function () {
@@ -11,13 +11,14 @@
   function fn() {
     var n = 2;
     // return new Function('a', 'b', 'return a + b');
-    return new Function("a", "b", "return a + b + n;");
+    return new Function("a", "b", "return a + b + n;"); // n is not defined
   }
 
   console.log(fn()(1, 2));
 })();
 
 (function () {
+  return
   var str = "var a = 1; var b = 2; return a + b + this.c;";
 
   var obj = {
@@ -26,12 +27,13 @@
 
   var fn = new Function(str).bind(obj);
 
-  console.log(fn());
+  console.log(fn()); // 103
 
-  eval("var a = 1; var b = 2; console.log(a+b)");
+  eval("var a = 1; var b = 2; console.log(a+b)"); // 3
 })();
 
 (function () {
+  return
   var str =
     "var r = []; for (var i = 0; i < data.length; i++) {r.push(data[i])} return r;";
 
@@ -56,7 +58,7 @@
 })();
 
 (function () {
-  // https://github.com/zymfe/ztpl
+  // https://github.com/zhaoyiming0803/ztpl
 
   var str = "var r = [];";
   str += "for (var i = 0; i < 3; i++) { ";
