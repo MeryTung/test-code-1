@@ -82,7 +82,7 @@
     return url;
   };
 
-  console.log(buildURL('https://github.com/zymfe?a=1', {
+  console.log(buildURL('https://github.com/zhaoyiming0803?a=1', {
     b: [
       1, 
       2, 
