@@ -1,5 +1,5 @@
 (function () {
-  // https://github.com/zymfe/test-code/blob/master/test19.js
+  // https://github.com/zhaoyiming0803/test-code/blob/master/test19.js
   const str = "1234567891.102";
 
   function formatPriceStr(str) {
