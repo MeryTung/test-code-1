@@ -1,5 +1,5 @@
-// https://github.com/zymfe/test-code/blob/master/test207-event-loop.js
-// https://github.com/zymfe/test-code/blob/master/test72.js
+// https://github.com/zhaoyiming0803/test-code/blob/master/test207-event-loop.js
+// https://github.com/zhaoyiming0803/test-code/blob/master/test72.js
 
 (function () {
   console.log("script start");
@@ -68,7 +68,7 @@
    *
    * http://www.cnblogs.com/dong-xu/p/7000163.html
    * http://www.cnblogs.com/dong-xu/p/7000139.html
-   * https://github.com/zymseo/Promise
+   * https://github.com/zhaoyiming0803/Promise
    */
 
   // 每当一个 Promise 被决议（或是被拒绝），便会将其回调函数添加至 microtask 任务队列中作为一个新的 microtask 。
