@@ -1,5 +1,5 @@
 (function () {
-  // https://github.com/zymfe/test-code/blob/master/test35.js
+  // https://github.com/zhaoyiming0803/test-code/blob/master/test35.js
   function compose() {
     var args = [].slice.call(arguments);
     // return function (arg) {
