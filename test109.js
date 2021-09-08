@@ -1,5 +1,5 @@
 (function () {
-  // https://github.com/zymfe/test-code/blob/master/test180.js
+  // https://github.com/zhaoyiming0803/test-code/blob/master/test180.js
   // 为什么 [] == ![]
   // https://segmentfault.com/a/1190000008594792
   // 关于相等操作符，可参考《JavaScript高级程序设计》第51页
