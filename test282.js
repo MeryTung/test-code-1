@@ -1,8 +1,8 @@
 ; (function () {
 
-  return
 
-  const arr = [1, 'a', { b: 2 }, 'a', { b: 2 }, '1', 1, [1, 2], [1, 2]]
+
+  const arr = [1, 'a', { b: 2 }, 'a', { b: 2 }, '1', 1, [1, 2], [1, 2], {a: 1, b: [{c: 3}]}]
 
   function unique(arr) {
     const map = new Map()
@@ -11,7 +11,7 @@
       if (typeof item !== 'object') {
         map.set(item, item)
       } else {
-        map.set(item.toString(), item)
+        map.set(JSON.stringify(item), item)
       }
     })
 
@@ -23,6 +23,8 @@
 })();
 
 (function () {
+
+  return
 
   const arr = [
     1, 
