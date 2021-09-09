@@ -1,5 +1,6 @@
 (function () {
-  const str = "asdfgfweak";
+  // 连续最大不重复子串
+  const str = "asdfgfweaka1234567890a";
 
   function getMaxSubstrByRecursive(str) {
     const map = new Map();
@@ -24,38 +25,41 @@
       }
     }
 
-    const remnant = Array.from(map.keys()).join("");
-    if (maxStr.length < remnant.length) {
-      maxStr = remnant;
-    }
-
     return maxStr;
   }
 
-  function getMaxSubstrByUnique(str) {
-    let maxStr = "";
+  function getMaxSubstrByWhile (str) {
+    let maxStr = ''
+    let map = {}
     for (let i = 0; i < str.length; i++) {
-      const substr = str.slice(i);
-      const substrLen = substr.length;
-      const maxStrLen = maxStr.length;
-      if (substrLen < maxStrLen) {
-        return maxStr;
-      }
-      if (
-        Array.from(new Set(substr)).length === substrLen &&
-        substrLen > maxStrLen
-      ) {
-        maxStr = substr;
+      let j = i
+      while (str[j]) {
+        if (!map[str[j]]) {
+          map[str[j]] = true
+          j++
+        } else {
+          const temp = str.slice(i, j)
+          if (temp.length > maxStr.length) {
+            maxStr = temp
+          }
+          map = {}
+          break
+        }
       }
     }
-    return maxStr;
+    return maxStr
   }
 
-  console.time("recursive");
-  console.log(getMaxSubstrByRecursive(str));
-  console.timeEnd("recursive");
+  // 对比之下，递归慢一些，以上 str，while平均 是 递归的 2 倍
+  console.time('getMaxSubstrByRecursive')
+  const res1 = getMaxSubstrByRecursive(str)
+  console.timeEnd('getMaxSubstrByRecursive')
 
-  console.time("unique");
-  console.log(getMaxSubstrByUnique(str));
-  console.timeEnd("unique");
+  console.time('getMaxSubstrByWhile')
+  const res2 = getMaxSubstrByWhile(str)
+  console.timeEnd('getMaxSubstrByWhile')
+
+  console.log('res1 === res2: ', res1 === res2)
+  console.log('res1: ', res1)
+
 })();
