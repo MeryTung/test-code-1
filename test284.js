@@ -1,4 +1,6 @@
 
+// 连续出现次数最多的字符 
+
 const str = '0sf0we0weeewe0w000gvfff'
 
 ; (function () {
