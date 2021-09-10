@@ -1,4 +1,5 @@
 ;(function () {
+    // 函数的执行是一个入栈出栈的过程，递归函数后面的变量永远是属于上一步的
 
     var cityList = [
       {id: 1, pid: 0, name: '北京市'},
@@ -11,11 +12,11 @@
     ];
   
     function formatArrayChildren (arr, pid = 0) {
-      let res = []
+      const res = []
       for (let i = 0; i < arr.length; i++) {
         if (arr[i].pid === pid) {
           arr[i].children = formatArrayChildren(arr, arr[i].id)
-          res = res.concat(arr[i])
+          res.push(arr[i])
         }
       }
       return res
