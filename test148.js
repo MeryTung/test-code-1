@@ -41,3 +41,43 @@
     )
   );
 })();
+
+;(function () {
+
+  const arr = new Array(11).fill(0).map((item, index) => index)
+  
+  function search (arr, target) {
+    let min = arr[0]
+    let max = arr[arr.length - 1]
+    
+    while (min < max) {
+      let middle = Math.floor((min + max) / 2)
+      if (middle > target) {
+        max = middle
+      } else if (middle < target) {
+        min = middle
+      } else {
+        return middle
+      }
+    }
+
+    // if (arr.length <= 1) {
+    //   if (target === arr[0]) return target
+    //   return
+    // }
+
+    // const minIndex = 0
+    // const maxIndex = arr.length - 1
+    // const middleIndex = Math.floor((minIndex + maxIndex) / 2)
+    // if (arr[middleIndex] < target) {
+    //   return search(arr.slice(middleIndex), target)
+    // } else if (arr[middleIndex] > target) {
+    //   return search(arr.slice(minIndex, middleIndex), target)
+    // } else {
+    //   return target
+    // }
+  }
+
+  console.log(search(arr, 8))
+
+})();

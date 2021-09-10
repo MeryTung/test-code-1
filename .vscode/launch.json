@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "启动程序",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/test282.js"
+      "program": "${workspaceFolder}/test148.js"
     }
   ]
 }
