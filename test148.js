@@ -1,6 +1,7 @@
 (function () {
   // binary search
   // 二分查找的数组必须是有序列表
+  // 对于连续的数字，可以直接用中间值作为二分，否则，需要用中间索引作为二分
   var arr = [1, 2, 3, 100, 4, 8, 101, 54, 93, 27, 65];
 
   // function search (arr, target) {
