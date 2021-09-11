@@ -28,6 +28,9 @@
   
     function normalizeArrayChildren (arr) {
       let res = []
+      if (!Array.isArray(arr)) {
+        return res
+      }
       for (let i = 0; i < arr.length; i++) {
         res.push(arr[i])
         res = res.concat(normalizeArrayChildren(arr[i].children))
