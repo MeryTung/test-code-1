@@ -94,9 +94,17 @@
         }
       })
 
+      nextTick(() => {
+        console.log('obj.num - 0: ', obj.num) // 4
+      })
+
       for (let i = 0; i < 5; i++) {
         obj.num = i
       }
+
+      nextTick(() => {
+        console.log('obj.num - 1: ', obj.num) // 4
+      })
 
       const obj1 = {
         id: 2,
