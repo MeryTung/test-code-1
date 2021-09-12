@@ -13,9 +13,12 @@
     <script>
       ~(function () {
         // 捕获 异步 或 语法错误
+        // 对于 onerror 这种全局捕获，最好写在所有 JS 脚本的前面，因为你无法保证你写的代码是否出错，如果写在后面，一旦发生错误的话是不会被 onerror 捕获到的。
+        // 另外 onerror 是无法捕获到网络异常的错误。
         window.addEventListener("error", (e) => {
           console.log("window addEventListener error: ", e);
-        });
+          return true
+        }, true);
       })();
       // 捕获 Promise 错误
       window.addEventListener("unhandledrejection", function (e) {
@@ -38,7 +41,7 @@
       })();
     </script>
     <img
-      src="http://t8.baidu.com/it/u=1484500186,1503043093&fm=79&app=86&f=JPEG?w=1280&h=853"
+      src="http://t8.baidu.com/it/u=1484500186,15030430933&fm=79&app=86&f=JPEG?w=1280&h=853"
       alt=""
     />
     <script>
