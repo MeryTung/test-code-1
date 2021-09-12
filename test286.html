@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="box">
+    <a href="https://www.baidu.com" id="go">连接</a>
+  </div>
+
+  <script>
+    ;(function (window, document) {
+      // 默认事件：
+      // 单击“提交”按钮，阻止其提交表单
+      // 单击链接，防止链接跟随 URL
+
+      document.querySelector('#go').onclick = function (e) {
+        // 通过 cancelable 判断当前事件是否可以被阻止
+        if (e.cancelable) {
+          e.preventDefault()
+        }
+        // preventDefault() 方法不会阻止事件通过 DOM 进一步传播。点击 a 标签，box 注册的事件回调也会被执行。
+        // 如果需要阻止事件继续传播，可以使用 stopPropagation() 方法来解决。
+        e.stopPropagation()
+      }
+
+      document.querySelector('#box').addEventListener('click', e => {
+        console.log('click box: ', e)
+      })
+    })(window, document);
+  </script>
+</body>
+</html>
