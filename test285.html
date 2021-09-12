@@ -9,6 +9,8 @@
 </head>
 
 <body>
+  <div id="box"></div>
+
   <script>
     ; (function (window, document) {
 
@@ -18,6 +20,7 @@
         handler() {
           // 最终只打印一次
           console.log('--', this._num)
+          document.querySelector('#box').innerHTML = this._num
         }
       }
 
@@ -94,16 +97,14 @@
         }
       })
 
-      nextTick(() => {
-        console.log('obj.num - 0: ', obj.num) // 4
-      })
-
       for (let i = 0; i < 5; i++) {
         obj.num = i
       }
 
+      console.log('innerHTML: ', document.querySelector('#box').innerHTML) // ''
+
       nextTick(() => {
-        console.log('obj.num - 1: ', obj.num) // 4
+        console.log('innerHTML in nextTick: ', document.querySelector('#box').innerHTML) // 4
       })
 
       const obj1 = {
