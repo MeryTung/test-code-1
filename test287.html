@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app"></div>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/vue/2.6.9/vue.js"></script>
+  <script>
+    // 当 Vue 正在更新使用 v-for 渲染的元素列表时，它默认使用“就地更新”的策略。
+    // 如果数据项的顺序被改变，Vue 将不会移动 DOM 元素来匹配数据项的顺序，而是就地更新每个元素，
+    // 并且确保它们在每个索引位置正确渲染。这个类似 Vue 1.x 的 track-by="$index"。
+
+    // 这个默认的模式是高效的，但是只适用于不依赖子组件状态或临时 DOM 状态 (例如：表单输入值) 的列表渲染输出
+
+
+    // 以下 demo 中，执行 deleteItem 想删除索引为1的那一项，但是发现 input 中的值没有变化。
+    // 把 contenteditable 的元素换成 input 也能复现同样的 bug
+    ;(function (window, document, Vue) {
+      new Vue({
+        el: '#app',
+        data () {
+          return {
+            list: [1, 2, 3]
+          }
+        },
+        template: '<div><button @click="deleteItem">button</button><div v-for="(item, index) in list" :key="index"><span style="display: inline-block; width: 50px; border: 1px solid red;" contenteditable></span>{{item}}</div></div>',
+        methods: {
+          deleteItem () {
+            this.list.splice(1, 1)
+          }
+        }
+      })
+    })(window, document, Vue);
+  </script>
+</body>
+</html>
