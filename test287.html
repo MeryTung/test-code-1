@@ -26,6 +26,9 @@
     // contenteditable 的 span 是 createElement 创建的，text 是 undefined
     // 所以 patch 的时候，认为新旧的 span 是同一个元素，没有改变，就会跳过。
     // 而 {{ item }} 的文本节点有变化，会直接替换
+
+    // 解决方法是：input 加 v-model，contenteditable 的元素可以加 v-html 或 v-text
+    // 会给 vnode 加一个 domProp 的属性，下次 patch 的时候对比就发现不是一个值，就会直接替换
     ;(function (window, document, Vue) {
       new Vue({
         el: '#app',
