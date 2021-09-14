@@ -20,7 +20,7 @@
       // 单击“提交”按钮，阻止其提交表单
       // 单击链接，防止链接跟随 URL
 
-      document.querySelector('#go').onclick = function (e) {
+      document.querySelector('#go').addEventListener('click', function (e) {
         console.log('e: ', e)
 
         // 通过 cancelable 判断当前事件是否可以被阻止
@@ -28,19 +28,20 @@
           e.preventDefault()
         }
         // preventDefault() 方法不会阻止事件通过 DOM 进一步传播。点击 a 标签，box 注册的事件回调也会被执行。
-        // 如果需要阻止事件继续传播（从以下 demo 来看是阻止了事件冒泡，没有阻止事件捕获。因为点击 inner-box 部分，click box 没有被打印），可以使用 stopPropagation() 方法来解决。
+        // 如果需要阻止事件继续传播（根据第三个参数是 true 和 false 的不同，可以阻止对应的捕获或冒泡事件），可以使用 stopPropagation() 方法来解决。
         e.stopPropagation()
-      }
+      }, true)
 
       document.querySelector('#box').addEventListener('click', e => {
         console.log('click box: ', e)
       })
 
       document.querySelector('#inner-box').addEventListener('click', e => {
-        // ??? 给 inner-box stopPropagation 后，点击 inner-box 部分又可以跳转了 ^_^
+        // ??? 如果给 #go 在冒泡阶段加上事件，给 inner-box stopPropagation 后，点击 inner-box 部分又可以跳转了 ^_^
         // e.stopPropagation()
         console.log('click inner-box: ', e)
       })
+      
     })(window, document);
   </script>
 </body>
