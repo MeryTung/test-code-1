@@ -20,6 +20,12 @@
 
     // 以下 demo 中，执行 deleteItem 想删除索引为1的那一项，但是发现 input 中的值没有变化。
     // 把 contenteditable 的元素换成 input 也能复现同样的 bug
+
+    // 原因是：通过 debug VNode 构造函数，可以看到，
+    // {{ item }} 是 createTextVnode 创建的
+    // contenteditable 的 span 是 createElement 创建的，text 是 undefined
+    // 所以 patch 的时候，认为新旧的 span 是同一个元素，没有改变，就会跳过。
+    // 而 {{ item }} 的文本节点有变化，会直接替换
     ;(function (window, document, Vue) {
       new Vue({
         el: '#app',
