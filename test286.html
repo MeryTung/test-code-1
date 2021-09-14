@@ -8,7 +8,10 @@
 </head>
 <body>
   <div id="box">
-    <a href="https://www.baidu.com" id="go">连接</a>
+    <a href="https://www.baidu.com" id="go" style="display: block; background-color: red; color: white;">
+      <div>link</div>
+      <div id="inner-box" style="background-color: blue;">inner box</div>
+    </a>
   </div>
 
   <script>
@@ -18,17 +21,25 @@
       // 单击链接，防止链接跟随 URL
 
       document.querySelector('#go').onclick = function (e) {
+        console.log('e: ', e)
+
         // 通过 cancelable 判断当前事件是否可以被阻止
         if (e.cancelable) {
           e.preventDefault()
         }
         // preventDefault() 方法不会阻止事件通过 DOM 进一步传播。点击 a 标签，box 注册的事件回调也会被执行。
-        // 如果需要阻止事件继续传播，可以使用 stopPropagation() 方法来解决。
+        // 如果需要阻止事件继续传播（从以下 demo 来看是阻止了事件冒泡，没有阻止事件捕获。因为点击 inner-box 部分，click box 没有被打印），可以使用 stopPropagation() 方法来解决。
         e.stopPropagation()
       }
 
       document.querySelector('#box').addEventListener('click', e => {
         console.log('click box: ', e)
+      })
+
+      document.querySelector('#inner-box').addEventListener('click', e => {
+        // ??? 给 inner-box stopPropagation 后，点击 inner-box 部分又可以跳转了 ^_^
+        // e.stopPropagation()
+        console.log('click inner-box: ', e)
       })
     })(window, document);
   </script>
