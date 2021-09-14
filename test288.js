@@ -1,5 +1,7 @@
 ; (function () {
 
+  // https://github.com/zhaoyiming0803/Promise/blob/dev/src/promise.js
+
   // 个人理解：
   // Promise 本身没有解决「异步回调地狱」的问题，async await 才解决了。
   // Promise 真正解决的是「信任问题」，把回调函数的执行权放到开发者手中，
