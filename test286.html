@@ -28,7 +28,7 @@
           e.preventDefault()
         }
         // preventDefault() 方法不会阻止事件通过 DOM 进一步传播。点击 a 标签，box 注册的事件回调也会被执行。
-        // 如果需要阻止事件继续传播（根据第三个参数是 true 和 false 的不同，可以阻止对应的捕获或冒泡事件），可以使用 stopPropagation() 方法来解决。
+        // 如果需要阻止事件继续传播（根据第三个参数是 true 和 false 的不同，可以阻止对应的捕获或冒泡事件传播），可以使用 stopPropagation() 方法来解决。
         e.stopPropagation()
       }, true)
 
