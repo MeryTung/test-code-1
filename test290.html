@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <img src="https://v3.cn.vuejs.org/images/lifecycle.svg" alt="">
+  <div id="container">
+    <div>
+      <button @click="addCounter">add counter</button>
+      <component-a :counter="counter"></component-a>
+      <todo-item></todo-item>
+      <!-- 与 vue2 一样，vue3 也没有解决 v-for 中将 index 作为 key 的问题 -->
+      <!-- ./test287.html -->
+      <div>
+        <button @click="deleteItem">button</button>
+        <div v-for="(item, index) in list" :key="index">
+          <span style="display: inline-block; width: 50px; border: 1px solid red;" contenteditable></span>
+          <span>{{ item }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/vue@next"></script>
+  <script>
+    const Counter = {
+      data() {
+        return {
+          counter: 0,
+          list: [1, 2, 3]
+        }
+      },
+      components: {
+        'component-a': {
+          props: {
+            counter: 0
+          },
+          template: '<h1>{{ counter }}</h1>'
+        }
+      },
+      mounted() {
+        this.counter += 100
+      },
+      methods: {
+        deleteItem() {
+          this.list.splice(1, 1)
+        },
+        addCounter () {
+          this.counter += 1
+        }
+      }
+    }
+
+    const app = Vue.createApp(Counter)
+    console.log('app: ', app)
+
+    app.component('todo-item', {
+      template: `<div>This is a todo</div>`
+    })
+
+    const vm = app.mount('#container')
+    console.log('vm: ', vm)
+  </script>
+</body>
+
+</html>
