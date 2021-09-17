@@ -18,7 +18,7 @@
   return
 
   function a () {}
-
+  // 关于变量提升：
   // 如果 a 没有被赋值，就不会覆盖函数声明的值
   // 把 function a 和 var a 的顺序调换一样，结果是一样的
   var a
