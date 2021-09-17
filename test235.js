@@ -1,6 +1,6 @@
 ;(function () {
 
-  const ast = {
+  const vnode = {
     tag: 'div',
     children: [{
       tag: 'p',
@@ -27,6 +27,6 @@
       : ''
   }
 
-  console.log(genNode(ast))
+  console.log(genNode(vnode))
 
 })();
