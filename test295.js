@@ -31,11 +31,7 @@
         }
         res = 'error'
       } else {
-        if (i !== arr.length) {
-          res = 'error'
-        } else {
-          res = value
-        }
+        res = 'error'
       }
     }
 
@@ -83,11 +79,7 @@
         }
         res = 'error'
       } else {
-        if (i !== arr.length) {
-          res = 'error'
-        } else {
-          res = value
-        }
+        res = 'error'
       }
       return res
     }
