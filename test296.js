@@ -7,7 +7,11 @@
       ')': '(',
       ']': '['
     }
-    const leftList = Object.values(map)
+    const leftMap = Object.values(map).reduce((map, value) => {
+      map[value] = true
+      return map
+    }, {})
+
     const stack = []
 
     for (let i = 0; i < str.length; i++) {
@@ -15,7 +19,7 @@
         stack.push(str[i])
         continue
       }
-      if (leftList.indexOf(str[i]) !== -1) {
+      if (leftMap[str[i]]) {
         stack.push(str[i])
         continue
       }
