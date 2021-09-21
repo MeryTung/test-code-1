@@ -1,5 +1,6 @@
 ;(function () {
 
+  // star component
   // * * * * * | * * * * *
 
   const starList = (function () {
