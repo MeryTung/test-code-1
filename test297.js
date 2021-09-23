@@ -6,17 +6,11 @@
   const starList = (function () {
     const starList = []
     for (let i = 0; i < 10; i++) {
-      if (i < 5) {
-        starList.push({
-          value: '*',
-          type: 'colorful'
-        })
-      } else {
-        starList.push({
-          value: '*',
-          type: 'gray'
-        })
-      }
+      const type = i < 5 ? 'colorful' : 'gray'
+      starList.push({
+        value: '*',
+        type
+      })
     }
     return starList
   })();
