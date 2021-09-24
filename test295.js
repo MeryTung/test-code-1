@@ -44,6 +44,7 @@
   console.log(get(obj, 'b.c.d'))
   console.log(get(obj, 'b.c.d.e'))
   console.log(get(obj, 'a.b2.c'))
+  console.log(get(obj, 'b.d'))
 
   console.log('------------------------')
 })();
@@ -89,5 +90,6 @@
   console.log(get('b.c.d')(obj))
   console.log(get('acb.c')(obj))
   console.log(get('b.c.d.e')(obj))
+  console.log(get('b.d')(obj))
 
 })();
