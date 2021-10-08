@@ -15,7 +15,7 @@
       // res 是第一层
       // for循环中的 city 是第二层
       // 递归执行的 formatArrayChildren 是第三层
-      // 层层嵌套，形成最终的梳状结构
+      // 层层嵌套，形成最终的树状结构
       const res = []
       for (let i = 0; i < arr.length; i++) {
         if (arr[i].pid === pid) {
