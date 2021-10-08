@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <script>
+    /*
+      定义：in操作符用来判断某个属性属于某个对象，可以是对象的直接属性，也可以是通过prototype继承的属性。
+
+      1.对于数组属性需要指定数字形式的索引值来表示数组的属性名称（固有属性除外，如length）。
+      // Arrays var trees = new Array(“redwood”, “bay”, “cedar”, “oak”, “maple”); 0 in trees // returns true
+
+      2.in的右边必须是一个对象，如：你可以指定一个用String构造器生成的，但是不能指定字符串直接量的形式：
+      var color1 = new String(“green”); “length” in color1 // returns true
+
+      3.如果你使用delete操作符删除了一个属性，再次用in检查时，会返回false，如：
+      var mycar = {make: “Honda”, model: “Accord”, year: 1998}; delete mycar.make; “make” in mycar; // returns false
+
+      4.如果你把一个属性值设为undefined，但是没有使用delete操作符，使用in检查，会返回true.
+    */
+    var a
+    if (!('a' in window)) {
+      a = 1
+    }
+    console.log(a) // undefined
+  </script>
+</body>
+</html>
