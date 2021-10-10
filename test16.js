@@ -19,14 +19,39 @@
       const res = []
       for (let i = 0; i < arr.length; i++) {
         if (arr[i].pid === pid) {
-          arr[i].children = formatArrayChildren(arr, arr[i].id)
+          const children = formatArrayChildren(arr, arr[i].id)
+          if (children.length) {
+            arr[i].children = children
+          }
           res.push(arr[i])
         }
       }
       return res
     }
-    
-    const formatedArrayChildren = formatArrayChildren(cityList)
+
+    // 空间换时间，执行效率更高，但是无法避免空的 children 列表
+    function formatArrayChildren2 (arr, rootId = 0) {
+      const map = {}
+      const res = []
+
+      arr.forEach(item => {
+        item.children = []
+        map[item.id] = item
+      })
+
+      arr.forEach(item => {
+        if (item.pid === rootId) {
+          res.push(item)
+        } else {
+          // 由于持有的是引用，record 中相关元素的修改，会在反映在 root 中
+          map[item.pid].children.push(item)
+        }
+      })
+
+      return res
+    }
+
+    const formatedArrayChildren = formatArrayChildren2(cityList)
     console.log(formatedArrayChildren)
     console.log('-----------------')
   
