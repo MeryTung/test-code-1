@@ -63,7 +63,8 @@
    * 每一个 task 中产生的 microtask 都将会添加到 microtask 队列中，microtask 中产生的 microtask 将会添加至当前队列的尾部，并且 microtask 会按序的处理完队列中的所有任务。
    * microtask 类型的任务目前包括了 MutationObserver 以及 Promise 的回调函数。
    *
-   * 事件队列严格按照时间先后顺序将任务压入执行栈执行，所以浏览器能够使得 JavaScript 内部任务与 DOM 任务有序的执行。当一个 task 执行结束后，在下一个 task 执行开始前，浏览器可以对页面进行重新渲染。
+   * 事件队列严格按照时间先后顺序将任务压入执行栈执行，所以浏览器能够使得 JavaScript 内部任务与 DOM 任务有序的执行。
+   * ------ 当一个 task 执行结束后，在下一个 task 执行开始前，浏览器可以对页面进行重新渲染。-------
    * 当执行栈为空时，浏览器会一直不停的检查事件队列，如果不为空，则取出第一个任务；
    *
    * http://www.cnblogs.com/dong-xu/p/7000163.html
@@ -75,5 +76,7 @@
   // 这也保证了 Promise 可以异步的执行。
   // 所以当我们调用 .then(resolve, reject) 的时候，会立即生成一个新的 microtask 添加至队列中，
   // 这就是为什么上面的 'promise1' 和 'promise2' 会输出在 'script end' 之后，因为 microtask 任务队列中的任务必须等待当前 task 执行结束后再执行，
-  // 而 'promise1' 和 'promise2' 输出在 'setTimeout' 之前，这是因为 'setTimeout' 是一个新的 task，而 microtask 执行在当前 task 结束之后，下一个 task 开始之前。
+  // 而 'promise1' 和 'promise2' 输出在 'setTimeout' 之前，这是因为 'setTimeout' 是一个新的 task，
+  // ------ 而 microtask 执行在当前 task 结束之后，下一个 task 开始之前。------
+  // Vue 异步刷新视图正好利用了一个特性，一个 task 执行完毕，下一个 task 开始前会执行页面渲染，同时下一个 task 开始前也会执行所有的微任务，得到最终的值。
 })();
