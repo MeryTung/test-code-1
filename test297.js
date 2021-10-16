@@ -17,6 +17,8 @@
 
   
   function clickStar (index) {
+    // 2: 2 -> 7
+    // 3: 1 -> 6
     return starList.slice(4 - index, 9 - index)
   }
 
