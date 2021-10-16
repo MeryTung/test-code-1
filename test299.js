@@ -1,6 +1,10 @@
 ;(function () {
 
-  // 1 3 2
+  // 1 3 2 4
+
+  setImmediate(() => {
+    console.log(4)
+  })
 
   setTimeout(() => {
     console.log(2)
