@@ -1,48 +1,46 @@
 ;(function () {
 
   function mergeSort (arr) {
-    if (arr.length === 1) {
+    if (arr.length <= 1) {
       return arr
     }
 
-    var middle = Math.floor(arr.length / 2)
-    var left = arr.slice(0, middle)
-    var right = arr.slice(middle)
+    const middleIndex = Math.floor(arr.length / 2)
+    const left = arr.slice(0, middleIndex)
+    const right = arr.slice(middleIndex)
 
-    var merged = merge(mergeSort(left), mergeSort(right))
-
-    console.log('merged', merged)
-
+    const merged = merge(mergeSort(left), mergeSort(right))
+    console.log('merged: ', merged)
     return merged
   }
 
-  function merge (left /* [2, 5] */, right /* [3, 4] */) {
-    var res = []
-    var i = 0 
-    var j = 0
-    var leftLen = left.length
-    var rightLen = right.length
+  function merge (left, right) {
+    let i = 0
+    let j = 0
+    let arr = []
+    const leftLen = left.length
+    const rightLen = right.length
 
     while (i < leftLen && j < rightLen) {
       if (left[i] < right[j]) {
-        res.push(left[i++])
+        arr.push(left[i++])
       } else {
-        res.push(right[j++])
+        arr.push(right[j++])
       }
     }
-    
-    while (i < leftLen) {
-      res.push(left[i++])
+
+    if (i < leftLen) {
+      arr = arr.concat(left.slice(i))
     }
 
-    while (j < rightLen) {
-      res.push(right[j++])
+    if (j < rightLen) {
+      arr = arr.concat(right.slice(j))
     }
 
-    return res
+    return arr
   }
 
+  console.log(merge([1, 2], [0, 4]))
   console.log(mergeSort([100, 9, 10, 0, 3, 4, 2]))
-  console.log(merge([2, 5], [3, 4, 6]))
 
 })();
