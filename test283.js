@@ -14,7 +14,8 @@
       d: {
         xx: 'adxx'
       },
-      e: 'ae'
+      e: 'ae',
+      f: [1, 2, 3]
     }
   }
   
@@ -26,10 +27,11 @@
 
   function mapDataPathAndValue (data) {
     const map = {}
+    const type = value => Object.prototype.toString.call(value).replace(/\[\w+\s(\w+)\]/, ($0, $1) => $1)
 
     function buildMap (key, value) {
       key = Array.isArray(key) ? key : [key]
-      if (typeof value === 'object') {
+      if (type(value) === 'Object') {
         Object.keys(value).forEach(_key => {
           buildMap(key.concat(_key), value[_key])
         })
