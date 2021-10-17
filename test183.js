@@ -8,6 +8,13 @@
   }
   fn(1, 2); // 1, 200, [Arguments] { '0': 1, '1': 200 }
   fn(1); // 1, undefined, [Arguments] { '0': 1, '1': 200 }
+
+  function fn1 (num0, num1) {
+    num1 = 300
+    console.log(num0, num1, arguments)
+  }
+  fn1(1, 2) // 1 300 [Arguments] { '0': 1, '1': 300 }
+  fn1(1) // 1 300 [Arguments] { '0': 1 }
 })();
 
 (function () {
