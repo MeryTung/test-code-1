@@ -62,28 +62,50 @@
   console.timeEnd("depth");
 
   function breadthTraversal(tree) {
-    const list = [];
+    // const list = [];
 
-    function next(tree) {
-      if (isPrimitive(tree)) {
-        list.push(tree.name);
-        next(tree.children);
-      } else if (Array.isArray(tree)) {
-        const tmp = [];
-        tree.forEach((item) => {
-          list.push(item.name);
-          tmp.push(item);
-        });
-        tmp.forEach((item) => {
-          if (Array.isArray(item.children)) {
-            next(item.children);
-          }
-        });
-      }
+    // function next(tree) {
+    //   if (isPrimitive(tree)) {
+    //     list.push(tree.name);
+    //     next(tree.children);
+    //   } else if (Array.isArray(tree)) {
+    //     const tmp = [];
+    //     tree.forEach((item) => {
+    //       list.push(item.name);
+    //       tmp.push(item);
+    //     });
+    //     tmp.forEach((item) => {
+    //       if (Array.isArray(item.children)) {
+    //         next(item.children);
+    //       }
+    //     });
+    //   }
+    // }
+    // next(tree);
+
+    // return list;
+
+    let list = []
+
+    if (isPrimitive(tree)) {
+      list = list.concat(tree.name, breadthTraversal(tree.children))
+    } else if (Array.isArray(tree)) {
+      // tree.reduce((arr, item) => {
+      //   list.push(item.name)
+      //   arr.push(item.children)
+      //   return arr
+      // }, []).forEach(item => {
+      //   list = list.concat(breadthTraversal(item))
+      // })
+      tree.forEach(item => {
+        list.push(item.name)
+      })
+      tree.forEach(item => {
+        list = list.concat(breadthTraversal(item.children))
+      })
     }
-    next(tree);
 
-    return list;
+    return list
   }
 
   console.time("breadth");
