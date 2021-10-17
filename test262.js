@@ -46,8 +46,12 @@
     async2
     promise1
     script end
+
+    // 在浏览器中是先执行 async1 end，再执行 promise2
+    // 在 windows node v10 中是先执行 promise2，再执行 async1 end，更高版本的 node 中待验证
     async1 end
     promise2
+    
     setTimeout
   */
 
@@ -62,8 +66,9 @@
 
   async function async2 () {
     console.log('async2')
-    return new Promise(() => {
+    return new Promise((resolve) => {
       console.log('promise')
+      // resolve()
     })
     // return Promise.resolve('promise')
   }
