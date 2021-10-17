@@ -35,10 +35,11 @@ const data = {
   function mapDataPathAndValue (data, path = [], map = {}) {
     Object.keys(data).forEach(key => {
       const _path = path.concat(key)
-      if (typeof data[key] === 'object') {
-        mapDataPathAndValue(data[key], _path, map)
+      const value = data[key]
+      if (typeof value === 'object') {
+        mapDataPathAndValue(value, _path, map)
       } else {
-        map[_path.join('.')] = data[key]
+        map[_path.join('.')] = value
       }
     })
     return map
