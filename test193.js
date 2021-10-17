@@ -8,38 +8,48 @@
   function fn() {}
   function Fn() {}
 
-  console.log(fn.prototype.constructor); // [Function: fn]
-  console.log(Fn.prototype.constructor); // [Function: Fn]
+  console.log(fn.prototype.constructor) // [Function: fn]
+  console.log(Fn.prototype.constructor) // [Function: Fn]
 })();
 
 (function () {
   // JavaScript高级程序设计 - 156页
   function Person() {}
 
-  var person = new Person();
-
+  var person = new Person()
   Person.prototype = {
-    name: "zhangsan",
-    age: 18,
-  };
+    name: 'zhangsan',
+    age: 18
+  }
 
-  console.log(person.name); // undefined
+  console.log(person.name) // undefined
+})();
+
+(function () {
+  // JavaScript高级程序设计 - 156页
+  function Person() {}
+
+  var person = new Person()
+
+  Person.prototype.name = 'lisi'
+
+  console.log('---', person.name) // lisi
 })();
 
 (function () {
   function Person() {}
 
   Person.prototype = {
-    name: "zhangsan",
+    name: 'zhangsan',
     age: 18,
-  };
+  }
 
-  var person = new Person();
+  var person = new Person()
 
-  console.log(person.name); // zhangsan
-  console.log(person.constructor === Object); // true
-  console.log(person.constructor === Person); // false
-  console.log(person instanceof Person); // true
+  console.log(person.name) // zhangsan
+  console.log(person.constructor === Object) // true
+  console.log(person.constructor === Person) // false
+  console.log(person instanceof Person) // true
 })();
 
 (function () {
@@ -48,19 +58,19 @@
   Person.prototype = {
     // 因为 constructor 属性本身不可枚举，所以使用下面的数据属性手动设置 enumerable 和 value
     // constructor: Person
-    name: "zhangsan",
+    name: 'zhangsan',
     age: 18,
-  };
+  }
 
   // 数据属性
-  Object.defineProperty(Person.prototype, "constructor", {
+  Object.defineProperty(Person.prototype, 'constructor', {
     enumerable: false,
     value: Person,
-  });
+  })
 
-  var person = new Person();
+  var person = new Person()
 
-  console.log(person.name); // zhangsan
-  console.log(person.constructor === Person); // true
-  console.log(person instanceof Person); // true
+  console.log(person.name) // zhangsan
+  console.log(person.constructor === Person) // true
+  console.log(person instanceof Person) // true
 })();
