@@ -65,8 +65,7 @@
 
     while (arr.length > 1) {
       const minIndex = 0
-      const maxIndex = arr.length - 1
-      const middleIndex = Math.floor((minIndex + maxIndex) / 2)
+      const middleIndex = Math.floor(arr.length / 2)
       if (arr[middleIndex] > target) {
         arr = arr.slice(minIndex, middleIndex)
       } else if (arr[middleIndex] < target) {
