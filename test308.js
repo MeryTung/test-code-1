@@ -32,6 +32,26 @@ const data = {
 
 ;(function () {
 
+  function getValueByPath (path, data) {
+    const arr = path.split('.')
+
+    function next (index, val) {
+      if (index <= arr.length - 1) { 
+        return next(index + 1, val[arr[index]])
+      }
+      return val
+    }
+    
+    return next(0, data)
+  }
+
+  console.log(getValueByPath('a.b.c', data)) // 100
+  console.log(getValueByPath('a.d.e', data)) // { f: 200 }
+
+})();
+
+;(function () {
+
   function mapDataPathAndValue (data, path = [], map = {}) {
     Object.keys(data).forEach(key => {
       const _path = path.concat(key)
