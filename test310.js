@@ -21,19 +21,14 @@
 
 ; (function () {
 
-  function sum(num) {
-    if (num < 10) {
-      return num
-    }
-    let b = 0
-    let c = 0
-    while (num >= 10) {
-      b = num % 10
-      c += b
+  function sum (num) {
+    let remainder = 0 // 余数
+    while (num > 10) {
+      remainder = num % 10 + remainder
       num = Math.floor(num / 10)
       if (num < 10) {
-        num += c
-        c = 0
+        num += remainder
+        remainder = 0
       }
     }
     return num
