@@ -5,9 +5,8 @@
   const arr = [2, 3, 5, 1, 8, 9, 4, 6, 7, 12, 0, 1, 2, 3]
 
   function searchMaxLength (arr) {
-    let i =  0
     const childList = []
-    for (; i < arr.length;) {
+    for (let i =  0; i < arr.length;) {
       let j = i + 1
       const tempList = [arr[i]]
       while (arr[j] > tempList[tempList.length - 1]) {
