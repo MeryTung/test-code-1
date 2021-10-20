@@ -56,3 +56,21 @@
   console.log(arr)
 
 })();
+
+;(function () {
+
+  // 也可以用数学方法反转一个数字或数字字符串
+
+  let num = 6789
+  let remainder = ''
+
+  while (num >= 10) {
+    remainder = remainder + num % 10
+    num = Math.floor(num / 10)
+  }
+
+  remainder += num
+
+  console.log(remainder)
+
+})();
