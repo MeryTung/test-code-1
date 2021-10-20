@@ -39,3 +39,20 @@
   console.timeEnd('sum2')
 
 })();
+
+;(function () {
+
+  let num = 6789
+  const arr = []
+  
+  while (num >= 10) {
+    const remainder = num % 10
+    arr.push(remainder)
+    num = Math.floor(num / 10)
+  }
+
+  arr.push(num)
+
+  console.log(arr)
+
+})();
