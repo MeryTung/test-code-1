@@ -90,8 +90,8 @@
         idxs: []
       }
       map.set(arr[i], {
-        num: value && ++value.num,
-        idxs: value && value.idxs.concat(i)
+        num: ++value.num,
+        idxs: value.idxs.concat(i)
       })
     }
 
