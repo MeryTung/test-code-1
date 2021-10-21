@@ -70,6 +70,52 @@
     }, [])
   }
 
+  console.time('getMaxSubstrAndPosition1')
   console.log(getMaxSubstrAndPosition(str))
+  console.timeEnd('getMaxSubstrAndPosition1')
+
+})();
+
+;(function () {
+
+  // 获取数组中出现最多的字符及次数和位置
+  const str = 'hello010o'
+  const arr = str.split('')
+
+  function getMaxSubstrAndPosition (arr) {
+    const map = new Map()
+    for (let i = 0; i < arr.length; i++) {
+      const value = map.get(arr[i]) || {
+        num: 0,
+        idxs: []
+      }
+      map.set(arr[i], {
+        num: value && ++value.num,
+        idxs: value && value.idxs.concat(i)
+      })
+    }
+
+    const res = []
+    let maxLength = 1
+    for (let [key, value] of map.entries()) {
+      res.push({
+        key,
+        ...value
+      })
+      maxLength = Math.max(value.num, maxLength)
+    }
+
+    return res.reduce((res, item) => {
+      if (item.num === maxLength) {
+        res.push(item)
+      }
+      return res
+    }, [])
+  }
+
+  // 速度更快些
+  console.time('getMaxSubstrAndPosition2')
+  console.log(getMaxSubstrAndPosition(arr))
+  console.timeEnd('getMaxSubstrAndPosition2')
 
 })();
