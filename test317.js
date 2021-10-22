@@ -36,6 +36,7 @@
   console.log(sum([-1, 2, 1, -4], 1))
   console.log(sum([0, 4, 2, 9, -8, 7, -3, 6, 5], 1))
   console.log(sum([0, 4, 2, 9, -8, 7, -3, 6, 5], -1))
+  console.log(sum([-1, -2, -3, -4, -5, -6, -7, -8, -9], -6))
 
 })();
 
@@ -43,7 +44,7 @@
 
   function sum (arr, target) {
     arr.sort((a, b) => a - b)
-    let minSum = 0
+    let minSum = arr[0] + arr[1] + arr[2]
     for (let i = 0; i < arr.length; i++) {
       let left = i + 1
       let right = arr.length - 1
@@ -68,4 +69,5 @@
   console.log(sum([-1, 2, 1, -4], 1))
   console.log(sum([0, 4, 2, 9, -8, 7, -3, 6, 5], 1))
   console.log(sum([0, 4, 2, 9, -8, 7, -3, 6, 5], -1))
+  console.log(sum([-1, -2, -3, -4, -5, -6, -7, -8, -9], -6))
 })();
