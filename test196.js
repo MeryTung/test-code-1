@@ -47,6 +47,6 @@
   }
 
   console.log(a.getAge()) // 18
-  console.log(SuperType.prototype.getAge) // [Function: getAge] 不使用Inner
-  console.log(SuperType.prototype.getAge) // undefined 使用Inner
+  console.log(SuperType.prototype.getAge) // undefined
+  console.log(SuperType.prototype.getAge) // undefined
 })()
