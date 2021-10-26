@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>移动端 300ms click 延迟</title>
+</head>
+<body>
+  <div id="container" style="width: 100px; height: 200px; background-color: red"></div>
+
+  <script>
+    ;(function (window, document) {
+      const container = document.querySelector('#container')
+
+      let time = Date.now()
+      let hasMoved = false
+
+      container.addEventListener('click', e => {
+        console.log('diff: ', Date.now() - time)
+        console.log('click:' , e)
+      })
+
+      container.addEventListener('touchstart', e => {
+        // 移动端点击事件触发的顺序：touchstart touchmove touchend click
+        
+        // 如果 touchmove 触发了，说明是触摸屏幕，click 事件不会被触发
+        // 否则 click 事件距离 touchstart 有 200 - 300 ms 的延迟
+        time = Date.now()
+        console.log('touchstart: ', e)
+      })
+
+      container.addEventListener('touchmove', e => {
+        hasMoved = true
+        console.log('touchmove: ', e)
+      })
+
+      container.addEventListener('touchend', e => {
+        // 禁止默认事件之后，click 事件将不会被触发
+        e.preventDefault()
+
+        console.log('touchend: ', e)
+        console.log('hasMoved: ', hasMoved)
+
+        hasMoved = false
+      })
+    })(window, document);
+  </script>
+</body>
+</html>
