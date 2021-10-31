@@ -25,6 +25,8 @@
 
 ;(function () {
 
+  // ./test303-fibonacci.jpg
+
   function getFib () {
     const map = {}
     return function _getFib (n) {
@@ -34,9 +36,7 @@
       if (n <= 2) {
         return (map[n] = n)
       }
-      const value = _getFib(n - 1) + _getFib(n - 2)
-      map[n] = value
-      return value
+      return (map[n] =  _getFib(n - 1) + _getFib(n - 2))
     }
   }
 
