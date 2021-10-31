@@ -17,7 +17,56 @@
     }
   }
 
+  console.time('getFib1')
   console.log(getFib(6)) // 13
+  console.timeEnd('getFib1')
+
+})();
+
+;(function () {
+
+  function getFib () {
+    const map = {}
+    return function _getFib (n) {
+      if (map[n]) {
+        return map[n]
+      }
+      if (n <= 2) {
+        return (map[n] = n)
+      }
+      const value = _getFib(n - 1) + _getFib(n - 2)
+      map[n] = value
+      return value
+    }
+  }
+
+  console.time('getFib2')
+  console.log(getFib()(6))
+  console.timeEnd('getFib2')
+
+})();
+
+;(function () {
+
+  // 时间复杂度和空间复杂度最优
+  function getFib (n) {
+    if (n <= 2) {
+      return n
+    }
+    let a = 1
+    let b = 2
+    let value
+    for (let i = 3; i <= n; i++) {
+      value = a + b
+      a = b
+      b = value
+    }
+    return value
+  }
+
+  console.time('getFib3')
+  console.log(getFib(6))
+  console.timeEnd('getFib3')
 
 })();
 
