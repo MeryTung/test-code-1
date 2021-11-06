@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>渐进式渲染大数据</title>
+</head>
+<body>
+  <div> init content </div>
+
+  <div id="container">
+
+  </div>
+
+  <script>
+    const list = (function () {
+      const list = []
+      for (let i = 0; i < 1000000; i++) {
+        list.push(`第 ${i} 列`)
+      }
+      return list
+    })();
+
+    function createElement (content) {
+      const element = document.createElement('div')
+      element.innerHTML = content
+      return element
+    }
+
+    function appendChild (parent, child) {
+      parent.appendChild(child)
+    }
+  </script>
+
+  <script>
+    ;(function (window, document, list, createElement, appendChild) {
+      return
+      const container = document.querySelector('#container')
+      list.forEach(item => {
+        appendChild(container, createElement(item))
+      })
+    })(window, document, list, createElement, appendChild)
+  </script>
+
+  <script>
+    ;(function (window, document, list, createElement, appendChild) {
+      return
+      const container = document.querySelector('#container')
+      const listLen = list.length
+      let i = 0
+      setTimeout(function () {
+        if (i < listLen) {
+          appendChild(container, createElement(list[i]))
+          i++
+          setTimeout(arguments.callee, 20)
+        }
+      }, 20)
+    })(window, document, list, createElement, appendChild)
+  </script>
+
+<script>
+  ;(function (window, document, list, createElement, appendChild) {
+    const container = document.querySelector('#container')
+    const listLen = list.length
+    let i = 0
+
+    requestAnimationFrame(function () {
+      if (i < listLen) {
+        appendChild(container, createElement(list[i]))
+        i++
+        requestAnimationFrame(arguments.callee)
+      }
+    })
+  })(window, document, list, createElement, appendChild)
+</script>
+</body>
+</html>
