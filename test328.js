@@ -61,9 +61,8 @@ const list = [{
     // 商品重量
     const w = list.map(item => item.weight)
 
-    // 只有一件商品时
     let preResults = []
-    for (let i = 0; i < capacity; i++) {
+    for (let i = 0; i <= capacity; i++) {
       if (i < w[0]) {
         preResults[i] = 0
       } else {
@@ -71,15 +70,13 @@ const list = [{
       }
     }
 
-    // 计算多件商品
     let result = []
     for (let i = 0; i < n; i++) {
-      for (let j = 0; j < capacity; j++) {
-        if (j + 1 < w[i]) {
+      for (let j = 0; j <= capacity; j++) {
+        if (j < w[i]) {
           result[j] = preResults[j]
         } else {
-          // .... 带优化
-          result[j] = Math.max(preResults[j], preResults[Math.abs(j - w[i])] + p[i])
+          result[j] = Math.max(preResults[j], preResults[j - w[i]] + p[i])
         }
       }
       preResults = result
