@@ -17,7 +17,11 @@ const tree = {
   right: {
     val: 3,
     left: null,
-    right: null
+    right: {
+      val: 1,
+      left: null,
+      right: null
+    }
   }
 }
 
@@ -65,6 +69,7 @@ const tree = {
 
     next(tree)
 
+    console.log(arr)
     return arr.reduce((a, b) => +a + +b, 0)
   }
 
