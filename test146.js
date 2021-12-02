@@ -26,18 +26,18 @@
       path: "/list",
       component: "List.page",
     },
-  ];
+  ]
 
   function normalizePath(path) {
-    return path.replace(/\/$/, "");
+    return path.replace(/\/$/, "")
   }
 
   function normalizeChildPath(path) {
     // 如果不是一级目录，就把第一个字符 / 去掉
     if (path.charAt(0) === "/") {
-      return path.slice(1);
+      return path.slice(1)
     }
-    return path;
+    return path
   }
 
   function createMatcher(routes, matcher = {}, parent) {
@@ -45,17 +45,17 @@
       const record = {
         path: normalizePath(route.path),
         component: route.component,
-      };
-      if (parent) {
-        record.path = `${parent.path}/${normalizeChildPath(route.path)}`;
       }
-      matcher[record.path] = record;
+      if (parent) {
+        record.path = `${parent.path}/${normalizeChildPath(route.path)}`
+      }
+      matcher[record.path] = record
       if (route.children) {
-        return createMatcher(route.children, matcher, record);
+        return createMatcher(route.children, matcher, record)
       }
     });
-    return matcher;
+    return matcher
   }
 
-  console.log(createMatcher(routes));
+  console.log(createMatcher(routes))
 })();
