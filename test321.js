@@ -9,7 +9,7 @@
   console.log('undefined === undefined: ', undefined === undefined) // true
 
   console.log('null == null: ', null == null) // true
-  console.log('null === null: ', null == null) // true
+  console.log('null === null: ', null === null) // true
 
   console.log('NaN == NaN: ', NaN == NaN) // true
   console.log('NaN === NaN: ', NaN === NaN) // true
