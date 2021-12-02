@@ -53,7 +53,7 @@
       if (route.children) {
         return createMatcher(route.children, matcher, record)
       }
-    });
+    })
     return matcher
   }
 
