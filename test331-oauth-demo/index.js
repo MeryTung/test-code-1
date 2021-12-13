@@ -27,6 +27,13 @@ async function oauth(ctx) {
   })
 
   const accessToken = tokenResponse.data.access_token
+  // {
+  //   access_token: '',
+  //   token_type: 'bearer',
+  //   scope: ''
+  // }
+  console.log('tokenResponse.data: ', tokenResponse.data)
+
   console.log(`accessToken: ${accessToken}`)
 
   const userInfo = await axios({
@@ -37,7 +44,7 @@ async function oauth(ctx) {
       Authorization: `token ${accessToken}`
     }
   })
-  console.log(userInfo.data)
+  console.log('userInfo.datae: ', userInfo.data)
   const { email } = userInfo.data
 
   ctx.response.redirect(`/welcome.html?email=${email}`)
