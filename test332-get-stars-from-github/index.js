@@ -1,3 +1,5 @@
+// https://docs.github.com/cn/rest/reference/activity#list-stargazers
+
 const fs = require('fs')
 const Json2csvParser = require('json2csv').Parser
  
