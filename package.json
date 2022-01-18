@@ -7,9 +7,11 @@
     "uglify-js": "^3.10.1"
   },
   "devDependencies": {
+    "@octokit/core": "^3.5.1",
     "acorn": "^8.0.4",
     "async-worker-threads-pool": "^1.0.1",
     "css": "^3.0.0",
+    "json2csv": "^5.0.6",
     "vue": "^2.6.12",
     "vue-router": "^3.4.3"
   },
