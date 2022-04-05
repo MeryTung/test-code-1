@@ -6,4 +6,5 @@
   console.log(a.__proto__ === A.prototype); // true
   console.log(a.__proto__.__proto__ === Object.prototype); // true
   console.log(a.__proto__.__proto__.__proto__); // null
+  console.log(typeof Object) // function
 })();
